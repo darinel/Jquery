@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script language="javascript" type="text/javascript" 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+</script>
+<script language="javascript" type="text/javascript">
+ 
+    $(document).ready( function () {
+ 
+	maxLength = $("textarea#comment").attr("maxlength");
+        $("textarea#comment").after("<div><span id='remainingLengthTempId'>" 
+                  + maxLength + "</span> remaining</div>");
+ 
+        $("textarea#comment").bind("keyup change", function(){checkMaxLength(this.id,  maxLength); } )
+ 
+    });
+ 
+    function checkMaxLength(textareaID, maxLength){
+ 
+        currentLengthInTextarea = $("#"+textareaID).val().length;
+        $(remainingLengthTempId).text(parseInt(maxLength) - parseInt(currentLengthInTextarea));
+ 
+		if (currentLengthInTextarea > (maxLength)) { 
+ 
+			// Trim the field current length over the maxlength.
+			$("textarea#comment").val($("textarea#comment").val().slice(0, maxLength));
+			$(remainingLengthTempId).text(0);
+ 
+		}
+    }
+</script>
+</head>
+ 
+<body>
+<h1>TextArea maxlength with jQuery</h1>
+<textarea id="comment" maxlength="10" rows="10" cols="60" ></textarea>
+</body>
+</html>
